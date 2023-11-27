@@ -2,3 +2,7 @@ pyvenv.cfg
 Lib/
 Scripts/
 ru.txt
+lib64
+bin
+lib
+
