@@ -1,0 +1,18 @@
+{% extends "cdn/base_index.html" %}
+{% block description_contetnt %}Утилиты для работы с CDN MEGAFON{% endblock %}
+{% block title %}Утилиты для работы с CDN MEGAFON{% endblock %}
+{% block h1 %}Утилиты для работы с CDN MEGAFON{% endblock %}
+{% block form_content %}
+{% if applications %}
+<div class="text-start list-group p-2">
+    {% for key, value in applications.items %}
+    <a href="{{key}}" class="list-group-item list-group-item-action">{{value}}</a>
+    {% endfor %}
+</div>
+{% else %}
+<div>Утилит не обнаружено</div>
+{% endif %}
+{% endblock %}
+{% block description %}
+<a href="https://cdn.lk.cdn.megafon.ru">Dashboard CDN MEGAFON</a>
+{% endblock %}

@@ -5,4 +5,7 @@ ru.txt
 lib64
 bin
 lib
-
+__pycache__/
+.gitsecret/keys/random_seed
+!*.secret
+pyspeller_site/pyspeller_site/secret_key.txt
