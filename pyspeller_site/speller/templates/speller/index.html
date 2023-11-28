@@ -1,18 +1,21 @@
-{% extends "cdn/base_index.html" %}
-{% block description_contetnt %}Утилиты для работы с CDN MEGAFON{% endblock %}
-{% block title %}Утилиты для работы с CDN MEGAFON{% endblock %}
-{% block h1 %}Утилиты для работы с CDN MEGAFON{% endblock %}
-{% block form_content %}
-{% if applications %}
-<div class="text-start list-group p-2">
-    {% for key, value in applications.items %}
-    <a href="{{key}}" class="list-group-item list-group-item-action">{{value}}</a>
+{% extends "speller/base_index.html" %}
+{% block description_contetnt %}Error articles at RIA.RU{% endblock %}
+{% block title %}Error articles at RIA.RU{% endblock %}
+{% block h1 %}Error articles at RIA.RU{% endblock %}
+{% block articles %}
+{% if results %}
+    {% for r in results %}
+    <p><a href="{{r.link}}" class="link-opacity-50-hover">{{r.link}}</a></p>
+    <p>Errors: {{r.error|length}}</p>
+    <p>Article: 
+        {% for w in r.article %}
+            {% if forloop.counter0 in r.error %}
+                <mark>{{w}}</mark>
+            {% else %}
+                {{ w }}
+            {% endif %}
+        {% endfor %}
+    </p>
     {% endfor %}
-</div>
-{% else %}
-<div>Утилит не обнаружено</div>
 {% endif %}
-{% endblock %}
-{% block description %}
-<a href="https://cdn.lk.cdn.megafon.ru">Dashboard CDN MEGAFON</a>
 {% endblock %}
