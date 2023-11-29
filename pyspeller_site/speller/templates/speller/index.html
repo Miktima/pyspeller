@@ -4,18 +4,42 @@
 {% block h1 %}Error articles at RIA.RU{% endblock %}
 {% block articles %}
 {% if results %}
-    {% for r in results %}
+    {% for r in results %}{% with fl1=forloop.counter0 %}
     <p><a href="{{r.link}}" class="link-opacity-50-hover">{{r.link}}</a></p>
     <p>Errors: {{r.error|length}}</p>
-    <p>Article: 
-        {% for w in r.article %}
-            {% if forloop.counter0 in r.error %}
-                <mark>{{w}}</mark>
-            {% else %}
-                {{ w }}
-            {% endif %}
-        {% endfor %}
-    </p>
-    {% endfor %}
+        {% spaceless %}
+        <p>Article: 
+            {% for w in r.article %}{% with fl2=forloop.counter0 %}
+                {% if fl2 in r.error %}
+                    <mark id="{{fl1}}_{{fl2}}">{{w}}</mark>
+                {% else %}
+                    {{ w }}
+                {% endif %}
+            {% endwith %}{% endfor %}
+        </p>
+        {% endspaceless %}
+    {% endwith %}{% endfor %}
 {% endif %}
+<script type="text/javascript">
+    $('mark').on('click', function (event) { 
+        if (event.ctrlKey) {
+            console.log($(event.target).text())
+            $.ajax({
+                type:'POST',
+                url:'{% url "save_word" %}',
+                data:
+                {
+                    word: $(event.target).text(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success:function(){
+                            $(event.target).css( "background", "#99ff66" );
+                        },
+                error: function(xhr, errmsg, err) {
+                            alert("Status: " + xhr.status + "ERROR:" + xhr.error + " " + errmsg + " " + err); 
+                       },                            
+            });
+        }
+    })
+</script>
 {% endblock %}
