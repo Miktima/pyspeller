@@ -21,8 +21,16 @@ def index(request):
 
     xmlResponse = requests.get(xmlUrl, headers=headers, verify=False)
 
+    addwords_list = []
+    for aw in Addwords.objects.order_by("id").all():
+        addwords_list.append(aw.word+"\n")
+    with open(str(settings.BASE_DIR) + '/add_ru.txt', 'w', encoding="utf-8") as f:
+        f.writelines(addwords_list)
+
+
     spell_ru = SpellChecker(language=None)
     spell_ru.word_frequency.load_text_file(str(settings.BASE_DIR) + '/ru.txt')
+    spell_ru.word_frequency.load_text_file(str(settings.BASE_DIR) + '/add_ru.txt')
     spell_en = SpellChecker()
 
     root = ET.fromstring(xmlResponse.content)

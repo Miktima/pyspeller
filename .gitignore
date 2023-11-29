@@ -9,3 +9,4 @@ __pycache__/
 .gitsecret/keys/random_seed
 !*.secret
 pyspeller_site/pyspeller_site/secret_key.txt
+pyspeller_site/add_ru.txt
