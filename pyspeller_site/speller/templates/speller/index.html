@@ -5,10 +5,10 @@
 {% block articles %}
 {% if results %}
     {% for r in results %}{% with fl1=forloop.counter0 %}
-    <p><a href="{{r.link}}" class="link-opacity-50-hover">{{r.link}}</a></p>
+    <p class="border-bottom mt-5"><a href="{{r.link}}" class="link-opacity-50-hover">{{r.link}}</a></p>
     <p>Errors: {{r.error|length}}</p>
-        {% spaceless %}
-        <p>Article: 
+        {% if r.article %}
+        <div class="card"><div class="card-body text-start">
             {% for w in r.article %}{% with fl2=forloop.counter0 %}
                 {% if fl2 in r.error %}
                     <mark id="{{fl1}}_{{fl2}}">{{w}}</mark>
@@ -16,8 +16,8 @@
                     {{ w }}
                 {% endif %}
             {% endwith %}{% endfor %}
-        </p>
-        {% endspaceless %}
+        </div></div>
+        {% endif %}
     {% endwith %}{% endfor %}
 {% endif %}
 <script type="text/javascript">

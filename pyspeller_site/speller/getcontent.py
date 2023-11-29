@@ -20,5 +20,5 @@ class getContent(HTMLParser):
 
     def handle_data(self, data):
         if self.intag == 1:
-            self.result += data
+            self.result += data + " "
     

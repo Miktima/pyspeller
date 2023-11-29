@@ -58,12 +58,14 @@ def index(request):
                     if testw not in spell_ru and testw not in spell_en and testw.isalpha():
                         ierr.append(nw)
             nw += 1
+        if len(ierr) == 0:
+            words = []
         result_list.append({
             "link": link,
             "error": ierr,
             "article": words
         })
-        if i == 5:
+        if i == 10:
             break
         i += 1
     context = {
@@ -73,14 +75,12 @@ def index(request):
     return render(request, 'speller/index.html', context)
 
 def save_word(request):
-    print (request.POST)
     mask = string.punctuation
     repl = " " * len(mask)
     trTable = str.maketrans(mask, repl)
     if request.method == 'POST':
         word = request.POST['word']
         word = (word.translate(trTable)).strip()
-        print (word)
         addWord = Addwords (word=word)
         addWord.save()
         return HttpResponse("OK")
