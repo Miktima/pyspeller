@@ -27,7 +27,7 @@ with open(BASE_DIR / "pyspeller_site/secret_key.txt") as f:
 DEBUG = True
 
 ALLOWED_HOSTS = ['rhel7-devel3.rian.off', '127.0.0.1']
-# CSRF_TRUSTED_ORIGINS = ['http://rhel7-devel3.rian.off:4321']
+CSRF_TRUSTED_ORIGINS = ['http://rhel7-devel3.rian.off:4322']
 
 
 # Application definition
@@ -119,27 +119,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / "static_files" 
-# STATICFILES_DIRS = [BASE_DIR / "cdn/static"]
+STATIC_ROOT = BASE_DIR / "static_files" 
+STATICFILES_DIRS = [BASE_DIR / "pyspeller_site/static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
-# # API Data
-# with open(BASE_DIR / "key.txt") as f:
-#     APIKEY = f.read().strip()
-# with open(BASE_DIR / "urls.json") as json_file:
-#     APIURLS = json.load(json_file)
-# with open(BASE_DIR / "metrics.json") as json_file2:
-#     APIMETRICS = json.load(json_file2)
-# with open(BASE_DIR / "logconfig.json") as json_file3:
-#     logconfig = json.load(json_file3)
-#     LOGFILTER = logconfig["filter"]
-#     LOGOPERATOR = logconfig["operator"]
-#     LOGCACHESTATUS = logconfig["cache_status"]
-#     LOGOPERATORPLUS = logconfig["operatorplus"]

@@ -10,3 +10,4 @@ __pycache__/
 !*.secret
 pyspeller_site/pyspeller_site/secret_key.txt
 pyspeller_site/add_ru.txt
+pyspeller_site/static_files/
