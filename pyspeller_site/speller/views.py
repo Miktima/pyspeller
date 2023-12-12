@@ -32,6 +32,7 @@ def index(request):
     spell_ru.word_frequency.load_text_file(str(settings.BASE_DIR) + '/ru.txt')
     spell_ru.word_frequency.load_text_file(str(settings.BASE_DIR) + '/add_ru.txt')
     spell_en = SpellChecker()
+    spell_ru.word_frequency.load_text_file(str(settings.BASE_DIR) + '/en.txt')
 
     root = ET.fromstring(xmlResponse.content)
 
@@ -39,7 +40,7 @@ def index(request):
     mask = string.punctuation
     repl = " " * len(mask)
     trTable = str.maketrans(mask, repl)
-    i = 0
+    # i = 0
     for item in root.iter('item'):
         parser = getContent("div", [("class", "article__text")])
         ierr = []
@@ -65,9 +66,9 @@ def index(request):
             "error": ierr,
             "article": words
         })
-        if i == 10:
-            break
-        i += 1
+        # if i == 10:
+        #     break
+        # i += 1
     context = {
         "results": result_list
     }
