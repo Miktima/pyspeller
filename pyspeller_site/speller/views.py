@@ -81,9 +81,10 @@ def save_word(request):
     trTable = str.maketrans(mask, repl)
     if request.method == 'POST':
         word = request.POST['word']
-        word = (word.translate(trTable)).strip()
-        addWord = Addwords (word=word)
-        addWord.save()
+        if Addwords.objects.filter(word=word).count() == 0:
+            word = (word.translate(trTable)).strip()
+            addWord = Addwords (word=word)
+            addWord.save()
         return HttpResponse("OK")
     else:
         return render(request, 'speller/index.html')
